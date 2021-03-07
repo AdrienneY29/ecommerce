@@ -1,12 +1,15 @@
 package com.tts.ecommerce.model;
 
-import lombok.Getter;
-import org.springframework.data.annotation.Id;
+import lombok.*;
+//import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Product {
 
     @Getter
