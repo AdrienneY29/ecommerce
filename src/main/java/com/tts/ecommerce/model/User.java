@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -32,7 +32,6 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
     private Long id;
 
     @NotEmpty(message = "Please provide a username")
@@ -48,7 +47,7 @@ public class User implements UserDetails {
     private String password;
 
     //from twitter this is to show whether user is enabled value of 1= active
-    private int active;
+//    private int active;
 
 
     //Map
@@ -85,46 +84,47 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
+
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     //this is new created from userService
-    public void setCart(Map<Product, Integer> cart) {
-        this.cart = cart;
-    }
-
-    public Map<Product, Integer> getCart() {
-        return cart;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public void setCart(Map<Product, Integer> cart) {
+//        this.cart = cart;
+//    }
+//
+//    public Map<Product, Integer> getCart() {
+//        return cart;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
 
     //

@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
     //added setActive fr twitter so that the user is active or enabled
     public void saveNew(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setActive(1);
+//        user.setActive(1);
         userRepository.save(user);
     }
 

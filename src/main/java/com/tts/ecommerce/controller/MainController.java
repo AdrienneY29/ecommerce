@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,21 +22,22 @@ public class MainController {
     ProductService productService;
 
     @GetMapping("/")
-    public String main(){
+    public String main() {
         return "main";
     }
 
     @ModelAttribute("products")
-    public List<Product>products(){
+    public List<Product> products() {
         return productService.findAll();
     }
+
     @ModelAttribute("categories")
-    public List<String> categories(){
+    public List<String> categories() {
         return productService.findDistinctCategories();
     }
 
     @ModelAttribute("brands")
-    public List<String>brands(){
+    public List<String> brands() {
         return productService.findDistinctBrands();
     }
 
@@ -45,10 +47,32 @@ public class MainController {
         model.addAttribute("products", filtered); //Overrides the @ModelAttribute above.
         return "main";
     }
-        @GetMapping("/about")
-                public String about(){
-            return "about";
+
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    public void addNew() {
+        List<Product> allProducts = productService.findAll();
+
+            if (allProducts.isEmpty()) {
+                List<Product> newProducts = new ArrayList<Product>();
+                newProducts.add(new Product(4, (float) 1500.00, "Apple MacBook Pro", "Apple", "Macbook Pro", "computer",
+                        "images/macbook_pro_blk.jpg"));
+                newProducts.add(new Product(3, (float) 1000.00, "C7 ST Desktop Front Edit", "Dell", "Desktop", "computer",
+                        "images/C7_Desktop.jpg"));
+                newProducts.add(new Product(12, (float) 800.00, "New iPhone 8, Silver", "Apple IPhone 8", "Apple Iphone", "phone",
+                        "images/iphone8_silver.jpg"));
+                newProducts.add(new Product(7,(float) 700.00, "New iPhone", "IPhone", "IPhone", "phone",
+                        "images/iphone_black.jpg"));
+                for (Product product : newProducts) {
+                    productService.save(product);
+                }
         }
 
-
+        else {
+            System.out.println("You don't need more items!");
+        }
+    }
 }

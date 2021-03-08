@@ -1,19 +1,25 @@
 package com.tts.ecommerce.model;
 
-import lombok.Getter;
-import org.springframework.data.annotation.Id;
+import lombok.*;
+//import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 
+@Data
+//@Builder
+//@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Product {
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "product_id")
-    private String id;
+    private Long id;
+
+    private int quantity;
+    private float price;
 
     private String name;
     private String brand;
@@ -21,10 +27,13 @@ public class Product {
     private String category;
     private String image;
 
-    private int quantity;
-    private float price;
-
-    public void setId(String id) {
-        this.id = id;
+    public Product(int quantity, float price, String name, String brand, String description, String category, String image) {
+        this.quantity = quantity;
+        this.price = price;
+        this.name = name;
+        this.brand = brand;
+        this.description = description;
+        this.category = category;
+        this.image = image;
     }
 }

@@ -40,8 +40,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/cart").authenticated()
                 .and().formLogin()
-                .loginPage("/signin")
-                .loginProcessingUrl("/login")
+                .loginPage("/signin").permitAll()
+                .loginProcessingUrl("/login").permitAll()
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/signout"))
                 .logoutSuccessUrl("/");
